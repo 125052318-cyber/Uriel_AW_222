@@ -16,6 +16,22 @@ echo("Hola mundo");
 
         div{  /*para el fondo */
             background-color: #12826d;
+            padding: 40px 20px;
+        }
+
+        .seccion{
+          background-color: #12826d;
+          padding: 40px 20px;  
+          margin: 20px;
+          border: 10px hidden #000;
+        }
+
+        .seccion1{
+          background-color: #da08a2;
+          margin-top: 20px;
+          margin-right: 30px; 
+          margin-bottom: 40px;
+          margin-left: 50px; 
         }
     </style>
 
@@ -29,10 +45,21 @@ echo("Hola mundo");
         <h5>Hola crayola</h5>
         <h6>Hola crayola</h6>
 
-        <div>
-            <p>Este es un parrafo</p>
-        </div>  
 
+
+        <div class="seccion">
+            <h2>Titulo del parrafo</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui excepturi, vitae, 
+                labore magni nihil assumenda temporibus quia laborum esse libero fuga 
+                porro? Repudiandae porro, quo similique suscipit ad harum mollitia!</p>
+        </div> 
+        
+         <div class="seccion1">
+            <h2>Titulo del parrafo</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui excepturi, vitae, 
+                labore magni nihil assumenda temporibus quia laborum esse libero fuga 
+                porro? Repudiandae porro, quo similique suscipit ad harum mollitia!</p>
+        </div> 
         
 </body>
 </html>
