@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .contenedor{
+ /*            display: flex;
+            flex-direction: row; */
+            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .card-larga{
+            grid-column: 3;
+            grid-row: span 3;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <div class="card" style="background-color: blue;  width:250px;"  >
+            <img src="https://tse1.explicit.bing.net/th/id/OIP.aAwLuGQtyRLBfZQD3nebwAAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="">
+            <h1>hsbcjdnajcblBKJcbln</h1>
+        </div>
+        <div class="card" style="background-color: blue;  width:250px;"  >
+            <h1>hsbcjdnajcblBKJcbln</h1>
+        </div>
+        <div class="card-larga" style="background-color: blue;  width:250px;"  >
+            <h1>hsbcjdnajcblBKJcbln</h1>
+        </div>
+
+        <div class="card" style="background-color: purple; width: 250px;" >
+            <h1>kdbjcndkjcndcnjncdk</h1>
+        </div>
+        <div class="card" style="background-color: purple; width: 250px;" >
+            <h1>kdbjcndkjcndcnjncdk</h1>
+        </div>
+        <div class="card" style="background-color: purple; width: 250px;" >
+            <h1>kdbjcndkjcndcnjncdk</h1>
+        </div>
+        <div class="card" style="background-color: purple; width: 250px;" >
+            <h1>kdbjcndkjcndcnjncdk</h1>
+        </div>
+    </div>
+
+</body>
+</html>
