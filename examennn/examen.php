@@ -135,6 +135,9 @@ $query = mysqli_query($con, $sql);
                         <td> <?php echo $row['marca'] ?></td>
                          <td> <?php echo $row['stock'] ?></td>
                         <td> <?php echo $row['precio'] ?></td>
+                        <td>
+                <a href="deleteE.php?id=<?php echo $row['id'] ?>">Eliminar</a>
+            </td>
                             </tr>
                         <?php
                          }
