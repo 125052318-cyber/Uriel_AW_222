@@ -46,6 +46,7 @@ $query = mysqli_query($con, $sql);
 
             <td>
                 <a href="delete.php?id=<?php echo $row['matricula'] ?>">Eliminar</a>
+                <a href="actualizar.php?id=<?php echo $row['matricula'] ?>">Editar</a>
             </td>
             </tr>
             <?php
