@@ -1,0 +1,22 @@
+RUTAS Y DECORADORES: la sitaxis de estos son @app.route y son "LETREROS" que le dicen a Flask que bloqué de codigo
+ejecutar a Python cuando el usuario visita una dirección especifica.
+
+METODOS HTTP (GET , POST): 
+ - GET: Se usa cuando el navegador quiere "pedir" y mostrar una pagina web (ejemplo: abrir solo el formulario para verlo)
+ - POST: Se usa cuando el navegador "envia" informacion al servidor 
+
+Conexión Frontend-Backend (request.form): Es la herramienta que usa Flask para atrapar la información enviada desde los formularios HTML. 
+La clave aquí es que el atributo name de tu etiqueta <input> en HTML tiene que coincidir exactamente con el texto entre corchetes en Python.
+
+Motor de Plantillas (Jinja2) y url_for(): Flask usa Jinja2 para incrustar lógica de Python dentro de tus archivos HTML usando llaves {{ }}. 
+La regla de oro de url_for() es que siempre genera enlaces basándose en el nombre de la función en Python (ej. def login:), nunca en el nombre del archivo .html
+ ni en la URL estática.
+
+Cifrado de Contraseñas (Hashing): La función generate_password_hash() transforma la contraseña real en una cadena de texto incomprensible. 
+Esto es una regla básica de ciberseguridad para nunca guardar contraseñas en texto plano en la base de datos.
+
+Cursores y Comodines SQL (%s): El cursor es el mensajero que viaja de Python a MySQL para entregar tus instrucciones. 
+Al enviar los datos usando comodines %s (en lugar de pegarlos directo en el código SQL), proteges tu base de datos contra ataques cibernéticos de "Inyección SQL".
+
+Transacciones en Base de Datos (commit()): En sistemas de bases de datos, los cambios no se aplican por completo hasta que confirmas la acción. 
+Si olvidas poner el commit(), el código se ejecutará sin errores, pero los datos nunca se guardarán en tu tabla.

@@ -1,6 +1,5 @@
 #Importamos la libreria de flak
-from flask import Flask , render_template, redirect, request
-
+from flask import Flask, render_template, redirect, request, session, url_for
 #Importamos las funciones de Mysql
 from flask_mysqldb import MySQL
 
@@ -31,29 +30,77 @@ def login():
 
         #Abrimos el cursor para abrir la base de datos 
         cursor = mysql.connection.cursor()
+        sql = """
+        SELECT 
+        usuarios.id,
+        usuarios.nombre,
+        usuarios.apellido_p,
+        usuarios.apellido_m,
+        usuarios.correo,
+        usuarios.password_hash,
+        roles.nombre
+        FROM usuarios
+        INNER JOIN roles
+        ON usuarios.id_rol = roles.id_rol
+        WHERE usuarios.correo = %s
+        """
 
         #Aqui buscamos en todos los datos del usuario que tenga ese correo 
-        cursor.execute ("SELECT * FROM usuarios WHERE correo = %s" , (correo_form,))
+        cursor.execute (sql , (correo_form,))
 
         #fetchone() solo trae un registro (El primero que encuentre)
         usuario = cursor .fetchone()
         cursor.close()
 
-        #Validamos si el usuario existe y si la contraseña cuadra
-        if usuario: #si la consulta nos trajo datos (es decir, el correo existe)
-            hash_guardado = usuario[5] # el 5 es porque la contraseña se encuentra en esa columna 
+        if usuario and check_password_hash(usuario[5] , password_form):
+            session["id_usuario"] = usuario[0]
+            session["nombre"] = usuario[1]
+            session["rol"] = usuario[6]
 
-            #El check_password_hash compara automaticamente el hash con el texto plano
-            if check_password_hash(hash_guardado , password_form):
-                return "INICIO DE SESION EXITOSO" # solo es el mensaje para confirmar
-            else:
-                return "ERROR: CONTRASEÑA INCORRECTA"
+            if session["rol"] =="Administrador":
+                return redirect(url_for("admin"))
 
-        else:
-            return "ERROR: EL CORREO NO ESTA REGISTRADO"
+            return redirect(url_for("usuario"))
 
+        return render_template(
+            "login.html",
+            error = "Correo o contraseña incorrectos"
+        )
+        
     return render_template("login.html")
 
+
+#RUTA DE ADMINISTRADOR
+@app.route("/admin")
+def admin():
+    if "id_usuario" not in session:
+        
+        return redirect(url_for("login"))
+
+    if session.get("rol") != "Administrador":
+        return "Acceso denegado"
+
+    return render_template("administrador.html" , nombre=session["nombre"])
+    
+#Ruta de usuario
+@app.route("/usuario")
+def usuario():
+
+    if "id_usuario" not in session:
+        return redirect(url_for("login"))
+
+    if session.get("rol") != "Usuario":
+        return "Acceso denegado"
+
+    return render_template("usuarios.html" , nombre=session["nombre"])
+
+
+#Ruta de logout
+@app.route("/logout")
+def logout():
+    session.clear()
+
+    return redirect(url_for("login"))
 
 """ En esta parte se le indica a FLASK que podemos manejar dos situaciones distintas mediante el GET/POST """
 """ GET: Su funcion es unicamente cuando el usuario simplemente escribe la URL o se mete a REGISTRATE """
